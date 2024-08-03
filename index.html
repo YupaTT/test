@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Editar archivo M3U8</title>
+    <title>Editar archivo M3U</title>
     <script>
-        // Simula un archivo test.m3u8 en el almacenamiento local
+        // Simula un archivo lista.m3u en el almacenamiento local
         if (!localStorage.getItem('lista.m3u')) {
             localStorage.setItem('lista.m3u', '#EXTM3U\n');
         }
@@ -15,13 +15,13 @@
             const textToAdd = document.getElementById('text').value;
             
             // Obtén el contenido actual del archivo simulado
-            let fileContent = localStorage.getItem('test.m3u8');
+            let fileContent = localStorage.getItem('lista.m3u');
             
             // Agrega el nuevo texto al contenido del archivo
             fileContent += textToAdd + '\n';
             
             // Guarda el nuevo contenido en el almacenamiento local
-            localStorage.setItem('test.m3u8', fileContent);
+            localStorage.setItem('lista.m3u', fileContent);
             
             // Muestra el contenido actualizado del archivo
             document.getElementById('fileContent').textContent = fileContent;
@@ -32,12 +32,12 @@
 
         // Mostrar el contenido del archivo al cargar la página
         window.onload = function() {
-            document.getElementById('fileContent').textContent = localStorage.getItem('test.m3u8');
+            document.getElementById('fileContent').textContent = localStorage.getItem('lista.m3u');
         }
     </script>
 </head>
 <body>
-    <h1>Editar archivo M3U8</h1>
+    <h1>Editar archivo M3U</h1>
     <form onsubmit="addTextToFile(); return false;">
         <label for="text">Texto a agregar:</label>
         <input type="text" id="text" name="text" required>
