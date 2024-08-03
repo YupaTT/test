@@ -5,35 +5,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Editar archivo M3U</title>
     <script>
-        // Simula un archivo lista.m3u en el almacenamiento local
-        if (!localStorage.getItem('lista.m3u')) {
-            localStorage.setItem('lista.m3u', '#EXTM3U\n');
+        // Función para cargar y mostrar el contenido del archivo M3U
+        async function loadM3UFile() {
+            try {
+                const response = await fetch('lista.m3u');
+                if (!response.ok) {
+                    throw new Error('No se pudo cargar el archivo');
+                }
+                const fileContent = await response.text();
+                document.getElementById('fileContent').textContent = fileContent;
+            } catch (error) {
+                console.error('Error:', error);
+                document.getElementById('fileContent').textContent = 'Error al cargar el archivo';
+            }
         }
 
         function addTextToFile() {
-            // Obtén el texto del campo de entrada
-            const textToAdd = document.getElementById('text').value;
-            
-            // Obtén el contenido actual del archivo simulado
-            let fileContent = localStorage.getItem('lista.m3u');
-            
-            // Agrega el nuevo texto al contenido del archivo
-            fileContent += textToAdd + '\n';
-            
-            // Guarda el nuevo contenido en el almacenamiento local
-            localStorage.setItem('lista.m3u', fileContent);
-            
-            // Muestra el contenido actualizado del archivo
-            document.getElementById('fileContent').textContent = fileContent;
-            
-            // Limpia el campo de entrada
-            document.getElementById('text').value = '';
+            // No se puede escribir directamente en el archivo M3U desde el navegador
+            alert('No se puede escribir en el archivo M3U desde el navegador.');
         }
 
-        // Mostrar el contenido del archivo al cargar la página
-        window.onload = function() {
-            document.getElementById('fileContent').textContent = localStorage.getItem('lista.m3u');
-        }
+        // Cargar el contenido del archivo al cargar la página
+        window.onload = loadM3UFile;
     </script>
 </head>
 <body>
